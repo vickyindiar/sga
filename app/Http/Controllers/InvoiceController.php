@@ -250,12 +250,11 @@ class InvoiceController extends Controller
                     (($amountValue !== '') && ($lastIndexHeaderRow - $totalCharRow > 3))
                   ){ $amountValue = $arrExDescValue[2]; }
 
-
                 //======= fix one campaign name has 2 rows
                  if ($unitsValue == '' && $qtyValue == '' && $amountValue == '' && $descValue !== ''){
                      $campaignName[count($campaignName) - 1] = $campaignName[count($campaignName)- 1].$descValue;
                  }
-                //====
+                //======
 
                 if ( $descValue !== '' && $unitsValue !== '' ) { array_push($campaignName, $descValue); }
                 if ( $qtyValue !== '') array_push($qty, $qtyValue);

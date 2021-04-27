@@ -21,18 +21,21 @@ use App\Http\Controllers\TestController;
 // });
 
 //customers
-Route::get('/customermanager', [AccountController::class, 'fetchCustomerManager']);
-Route::get('/customers', [AccountController::class, 'fetchAllCustomerId']);
-Route::get('/customers/auth', [AccountController::class, 'fetchOAuth2Google']);
-Route::get('/customers/verifiy-auth', [AccountController::class, 'verifyCodeOAuth2Google']);
+Route::middleware(['customAuth'])->group(function () {
+    Route::get('/customermanager', [AccountController::class, 'fetchCustomerManager']);
+    Route::get('/customers', [AccountController::class, 'fetchAllCustomerId']);
+    Route::get('/customers/auth', [AccountController::class, 'fetchOAuth2Google']);
+    Route::get('/customers/verifiy-auth', [AccountController::class, 'verifyCodeOAuth2Google']);
 
-Route::get('/campaign', [CampaignController::class, 'fetchAllCampaign']);
-Route::get('/campaign-budget', [CampaignController::class, 'fetchTrackPerformanceCampaignBudget']);
-Route::get('/campaign-criteria',  [CampaignController::class, 'fecthTargetingCriteria']);
-Route::get('/campaign-adgroup-criteria',  [CampaignController::class, 'fetchAdGroupInterest']);
+    Route::get('/campaign', [CampaignController::class, 'fetchAllCampaign']);
+    Route::get('/campaign-budget', [CampaignController::class, 'fetchTrackPerformanceCampaignBudget']);
+    Route::get('/campaign-criteria',  [CampaignController::class, 'fecthTargetingCriteria']);
+    Route::get('/campaign-adgroup-criteria',  [CampaignController::class, 'fetchAdGroupInterest']);
 
-Route::get('/billing', [InvoiceController::class, 'fetchBillingSetup']);
-Route::get('/invoice', [InvoiceController::class, 'fetchInvoice']);
-Route::get('/invoice-file', [InvoiceController::class, 'extractInvoice']);
-Route::get('/test', [TestController::class, 'test']);
+    Route::get('/billing', [InvoiceController::class, 'fetchBillingSetup']);
+    Route::get('/invoice', [InvoiceController::class, 'fetchInvoice']);
+    Route::get('/invoice-file', [InvoiceController::class, 'extractInvoice']);
+    Route::get('/test', [TestController::class, 'test']);
+});
+
 

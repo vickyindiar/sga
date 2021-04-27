@@ -161,6 +161,7 @@ class CampaignController extends Controller
         ->withOAuth2Credential($oAuth2Credential)
         ->build();
 
+
         $customerId = $request->input('customerId');
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
@@ -246,8 +247,10 @@ class CampaignController extends Controller
 
                 //::TEST ONLY REMOVE LATER
                 $invList = [];
-                if(file_exists(Storage::path('google-sample-invoice.json'))){
-                    $jsonString = file_get_contents(Storage::path('google-sample-invoice.json'));
+               // if(file_exists(Storage::path('google-sample-invoice.json'))){
+               //     $jsonString = file_get_contents(Storage::path('google-sample-invoice.json'));
+                if ($request->exists('invData')) {
+                    $jsonString = $request->input('invData');
                     $sampleData = json_decode($jsonString, true);
                     foreach ($sampleData as $key => $value) {
                         if($value['campaignId'] ==  $campaignId){
